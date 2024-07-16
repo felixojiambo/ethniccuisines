@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import rateLimit from 'express-rate-limit';
 import { authRouter } from './auth/auth.routes';
 import { restaurantRouter } from './restaurants/restaurant.routes';
+import { reviewRouter } from 'reviews/review.routes';
 
 dotenv.config();
 
@@ -25,7 +26,7 @@ app.use(limiter);
 // Routes
 app.use('/api/auth', authRouter);
 app.use('/api/restaurants', restaurantRouter);
-
+app.use('/api/reviews', reviewRouter);
 // Database Connection
 mongoose.connect(process.env.MONGO_URI || '')
   .then(() => {
