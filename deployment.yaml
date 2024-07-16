@@ -1,0 +1,33 @@
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ethniccuisines
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ethniccuisines
+  template:
+    metadata:
+      labels:
+        app: ethniccuisines
+    spec:
+      containers:
+      - name: ethniccuisines
+        image: your-repository-url/ethniccuisines:latest
+        ports:
+        - containerPort: 3000
+
+# service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: ethniccuisines
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 3000
+  selector:
+    app: ethniccuisines
